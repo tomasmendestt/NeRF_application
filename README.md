@@ -76,11 +76,65 @@ This script:
 - Estimates camera intrinsics and extrinsics
 - Normalizes the scene
 - Generates `transforms.json`
+
+The output directory contains:
+
+```bash
+<location>
+|---data
+    |---my_object
+        |---images
+            |---transforms.json
+            |---colmap
+```
+This formatted dataset is required for training.
+
 ---
 
 ## 3 Neural Field Training
 
+Run:
+
+```bash
+ns-train nerfacto --data path/to/output
+```
+
+During training:
+
+- Rays are sampled from images
+- Points are sampled along each ray
+- A neural network predicts:
+        - Density (σ)
+        - RGB color (c)
+- Volumetric rendering integrates these values
+- The loss is computed between predicted and ground-truth pixels
+- Parameters are optimized using Adam
+
+Training outputs:
+
+```bash
+<location>
+|---outputs
+    |---scene_name
+        |---nerfacto
+            |---timestamp
+                |---config.yml
+                |---nerfstudio_models
+                |---dataparser_transforms.json
+```
 ---
 
-## 4 Interactive Visualization
+## 4️⃣ Interactive Visualization
 
+During training, a local web-based viewer is automatically initialized.
+
+To monitor the optimization process in real time, open the URL displayed in the command prompt. The interface provides live visualization of camera poses, scene bounds, and intermediate renderings of the neural field.
+
+---
+
+### Alternatively, after training has finished
+
+Run:
+
+```bash
+ns-viewer --load-config path/to/config.yml
