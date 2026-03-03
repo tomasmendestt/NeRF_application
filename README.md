@@ -75,7 +75,7 @@ This script:
 - Runs COLMAP internally
 - Estimates camera intrinsics and extrinsics
 - Normalizes the scene
-- Generates `transforms.json´
+- Generates `transforms.json`
 ---
 
 ## 3 Neural Field Training
