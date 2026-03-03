@@ -104,8 +104,8 @@ During training:
 - Rays are sampled from images
 - Points are sampled along each ray
 - A neural network predicts:
-        - Density (σ)
-        - RGB color (c)
+        - Density
+        - RGB color
 - Volumetric rendering integrates these values
 - The loss is computed between predicted and ground-truth pixels
 - Parameters are optimized using Adam
