@@ -124,7 +124,7 @@ Training outputs:
 ```
 ---
 
-## 4️⃣ Interactive Visualization
+## 4 Interactive Visualization
 
 During training, a local web-based viewer is automatically initialized.
 
