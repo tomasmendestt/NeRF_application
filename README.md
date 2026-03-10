@@ -138,3 +138,40 @@ Run:
 
 ```bash
 ns-viewer --load-config path/to/config.yml
+```
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+## ZED Acquisition
+The input data used for the reconstruction was acquired using a **ZED stereo camera**.  
+To perform the acquisition step, the camera must first be connected to the computer and the appropriate Python environment must be activated.
+
+After that, run the acquisition script:
+
+```bash
+python importpyzed.py
+```
+
+The purpose of this step was to capture a sequence of views with sufficient overlap and viewpoint variation to enable reliable 3D reconstruction.
+
+During acquisition, the camera was moved smoothly around the target scene while maintaining stable motion and good visibility of the scene structure.
+
+Two acquisition strategies were used depending on the target:
+
+- **Object acquisition:** the camera was moved around the object to capture it from multiple viewpoints.
+- **Scene acquisition:** the camera was carried through the environment while maintaining continuous motion and covering the visible geometry.
+
+The recorded sequence was later used as the source input for the reconstruction.  
+From this data, image frames were extracted and used for camera pose estimation and training.
+
+### Acquisition Guidelines
+
+To obtain good reconstruction quality, the following conditions were considered during capture:
+
+- slow and continuous camera motion  
+- strong overlap between consecutive frames  
+- good lighting conditions  
+- minimal motion blur  
+- wide viewpoint coverage of the target  
+- avoidance of reflective, transparent, or textureless surfaces
+
