@@ -15,10 +15,11 @@ Nerfstudio – https://github.com/nerfstudio-project/nerfstudio
 
 The complete workflow consists of:
 
-1. Image acquisition
-2. Dataset Processing (`ns-process-data`)  
-3. Neural Field Training (`ns-train`)  
-4. Interactive Visualization (`ns-viewer`)  
+1. ZED Acquisition (`importpyzed.py`) 
+2. Frame Extraction (`extract_frames.py`)  
+3. Dataset Processing (`ns-process-data`)  
+4. Neural Field Training (`ns-train`)  
+5. Interactive Visualization (`ns-viewer`)  
 
 ---
 
@@ -40,54 +41,57 @@ pip install nerfstudio
 ```
 ---
 
-## 1 Image acquisition
+## 1. ZED Acquisition
 
-The images used for reconstruction were extracted from a video recording of the scene.
+The input data used for the reconstruction was acquired using a **ZED stereo camera**.  
+To perform the acquisition step, the camera must first be connected to the computer and the appropriate Python environment must be activated.
 
-Approximately 200 frames were sampled from the video to serve as the input dataset for the reconstruction pipeline. Frame extraction was performed to ensure sufficient overlap between consecutive views while avoiding redundant information.
-
-The extracted frames were organized in the following directory structure:
+After that, run the acquisition script:
 
 ```bash
-<location>
-|---data
-    |---my_object
-        |---images
-            |---<image 0>
-            |---<image 1>
-            |---...
+python importpyzed.py
 ```
 
-All subsequent processing steps (Structure-from-Motion, dataset conversion, and training) use the images contained in this folder as input.
+The script allows the user to select one of two acquisition modes:
+- Video mode: records a video sequence (.avi) for a user-defined duration.
+-  Frame mode: captures a user-defined number of frames directly.
+
+If the video mode is selected, the recorded video must later be converted into individual frames before continuing the pipeline.
+The purpose of this step was to capture a sequence of views with sufficient overlap and viewpoint variation to enable reliable 3D reconstruction.
+
+During acquisition, the camera was moved smoothly around the target scene while maintaining stable motion and good visibility of the scene structure.
+
+Two acquisition strategies were used depending on the target:
+
+- **Object acquisition:** the camera was moved around the object to capture it from multiple viewpoints.
+- **Scene acquisition:** the camera was carried through the environment while maintaining continuous motion and covering the visible geometry.
 
 ---
 
-## 2 Data Processing
+## 2. Frame Extraction
+
+If the acquisition was performed in video mode, the recorded video must be converted into individual frames.
+The video file must be saved inside the following directory structure:
+
+data/crane/input_video.mp4
+
+The frames should then be extracted inside the 'data/crane/' folder.
 
 Run:
 
 ```bash
-ns-process-data images --data path/to/frames --output-dir path/to/output
+python extract_frames.py -i scene_name/data/crane/input_video.mp4 --fps 3
 ```
 
-This script:
+**Note: You should adjust fps in order to have arround 200-300 frames per video**
+All images will then be saved inside 'scene_name/data/crane'
 
-- Runs COLMAP internally
-- Estimates camera intrinsics and extrinsics
-- Normalizes the scene
-- Generates `transforms.json`
+Recommended:
+ - Images must be captured with camera motion (not rotating the object with a fixed camera)
+ - Larger datasets increase processing time significantly
+ - Save all images inside a folder and call it '/input'
 
-The output directory contains:
-
-```bash
-<location>
-|---data
-    |---my_object
-        |---images
-            |---transforms.json
-            |---colmap
-```
-This formatted dataset is required for training.
+If the frame mode was used during acquisition, this step is not necessary since the images are already captured individually.
 
 ---
 
