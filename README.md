@@ -119,13 +119,13 @@ Training outputs:
 ```bash
 <location>
 │
-├──outputs
-   └── scene_name
-        └── nerfacto
-            └── timestamp
+├──outputs/
+   └── scene_name/
+        └── nerfacto/
+            └── timestamp/
                 ├── config.yml
                 ├── dataparser_transforms.json
-                ├── nerfstudio_models
+                ├── nerfstudio_models/
                     └──step-XXXXXXX.ckpt
 ```
 ---
