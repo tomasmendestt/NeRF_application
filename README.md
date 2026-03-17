@@ -118,13 +118,15 @@ Training outputs:
 
 ```bash
 <location>
-|---outputs
-    |---scene_name
-        |---nerfacto
-            |---timestamp
-                |---config.yml
-                |---nerfstudio_models
-                |---dataparser_transforms.json
+│
+├──outputs
+   └── scene_name
+        └── nerfacto
+            └── timestamp
+                ├── config.yml
+                ├── dataparser_transforms.json
+                ├── nerfstudio_models
+                    └──step-XXXXXXX.ckpt
 ```
 ---
 
