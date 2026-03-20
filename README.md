@@ -21,6 +21,14 @@ The complete workflow consists of:
 4. Neural Field Training (`ns-train`)  
 5. Interactive Visualization (`ns-viewer`)  
 
+OR if using an ipad:
+
+1. Ipad Acquisition
+2. Frame Extraction (`extract_frames.py`)  
+3. Dataset Processing (`ns-process-data`)  
+4. Neural Field Training (`ns-train`)  
+5. Interactive Visualization (`ns-viewer`)  
+
 ---
 
 ## Clone the Repository
@@ -65,6 +73,13 @@ Two acquisition strategies were used depending on the target:
 
 - **Object acquisition:** the camera was moved around the object to capture it from multiple viewpoints.
 - **Scene acquisition:** the camera was carried through the environment while maintaining continuous motion and covering the visible geometry.
+
+****Ipad acquisition****
+
+If an iPad is used, we recommend following the same acquisition strategy adopted for the ZED stereo camera.  
+During capture, the device should be moved smoothly around the scene while maintaining stable motion and ensuring good visibility of the scene geometry.
+
+The recorded video can be exported in .MOV format and must then be converted into individual frames, as described in the next section.
 
 ---
 
