@@ -3,7 +3,7 @@
 ## Overview
 
 This project implements a full pipeline for 3D scene reconstruction using Neural Rafiance Fields (NeRF).
-The The reconstruction process starts from a video sequence. Frames are extracted and used to estimate camera poses via Structure-from-Motion. A neural radiance field is  then trained to learn a continuous volumetric representation of the scene, enabling novel viewe synthesis.
+The reconstruction process starts from a video sequence. Frames are extracted and used to estimate camera poses via Structure-from-Motion. A neural radiance field is  then trained to learn a continuous volumetric representation of the scene, enabling novel viewe synthesis.
 
 The implementation is based on:
 
@@ -21,7 +21,7 @@ The complete workflow consists of:
 4. Neural Field Training (`ns-train`)  
 5. Interactive Visualization (`ns-viewer`)  
 
-OR if using an ipad:
+OR if using an Ipad:
 
 1. Ipad Acquisition
 2. Frame Extraction (`extract_frames.py`)  
