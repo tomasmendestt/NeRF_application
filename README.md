@@ -35,7 +35,7 @@ OR if using an iPad:
 
 ```bash
 git clone https://github.com/tomasmendestt/NeRF_application --recursive
-cd gaussian-splatting
+cd nerfstudio
 ```
 ---
 
